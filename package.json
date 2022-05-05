@@ -1,0 +1,23 @@
+{
+  "name": "njs101x_01-a_vn",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/duyht133/NJS101x_01-A_VN.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/duyht133/NJS101x_01-A_VN/issues"
+  },
+  "homepage": "https://github.com/duyht133/NJS101x_01-A_VN#readme",
+  "dependencies": {
+    "nodemon": "^1.18.3"
+  }
+}
