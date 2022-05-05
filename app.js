@@ -10,7 +10,5 @@ const rqListener = (req,res) =>{
     res.write('</html>');
     res.end();
 }
-
 const server = http.createServer(rqListener);
-
 server.listen(3000);
