@@ -1,19 +1,21 @@
-const http = require('http');
-
-const express = require('express');
-
+const express = require("express");
 const app = express(); // tạo biến app cho middleware (cú pháp bắc buộc)
 
 // sử dụng app với middleware use()
-app.use((req, res, next) => {
-    console.log('In the middleware!');
-    next(); // cho phép middleware tiếp tục
+app.use("/", (req, res, next) => {
+  console.log("chay o day");
+  next();
 });
 
-app.use((req, res, next) => {
-    console.log('In another middleware!');
-    res.send('<h1>Hello from Express!</h1>');
+app.use("/them-sp", (req, res, next) => {
+  console.log("In the middleware!");
+  res.send("<h1>add product</h1>");
+
 });
 
-const server = http.createServer(app);
-server.listen(3000);
+app.use("/", (req, res, next) => {
+  console.log("In another middleware!");
+  res.send("<h1>xin chao</h1>");
+}); // index phải là middleware cuối cùng
+
+app.listen(3000);
