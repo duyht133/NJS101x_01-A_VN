@@ -15,7 +15,7 @@ app.use("/them-sp", (req, res, next) => {
   );
 });
 
-app.use("/san-pham", (req, res, next) => {
+app.post("/san-pham", (req, res, next) => {
   console.log(req.body);
   res.redirect("/");
 });
