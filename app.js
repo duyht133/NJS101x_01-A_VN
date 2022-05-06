@@ -1,13 +1,19 @@
 const http = require('http');
-/* const routes = require('./routes');
-console.log(routes.sometext)
-const server = http.createServer();
-server.listen(3000); */
 
+const express = require('express');
 
+const app = express(); // tạo biến app cho middleware (cú pháp bắc buộc)
 
-// GET EXPRESS
- const express = require('express');
-// CALL EXPESS FORM FUNCTION
-const app = http.createServer(express());
-app.listen(3000);
+// sử dụng app với middleware use()
+app.use((req, res, next) => {
+    console.log('In the middleware!');
+    next(); // cho phép middleware tiếp tục
+});
+
+app.use((req, res, next) => {
+    console.log('In another middleware!');
+    res.send('<h1>Hello from Express!</h1>');
+});
+
+const server = http.createServer(app);
+server.listen(3000);
