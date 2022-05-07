@@ -8,6 +8,8 @@ const app = express();
 const path = require("path");
 
 app.use(bodyParser.urlencoded({ extended: false }));
+//thêm đường dẫn tĩnh static
+app.use(express.static(path.join(__dirname, 'public')));
 
 //phân lường đường dẫn, thêm patch /admin làm đường dẫn đầu vào
 app.use("/admin", adminRoutes);
