@@ -12,9 +12,9 @@ router.get('/them-sp', (req, res, next) => {
 });
 
 // /admin/add-product => POST
-router.post('/san-pham', (req, res, next) => {
+/* router.post('/them-sp', (req, res, next) => {
   console.log(req.body);
   res.redirect('/');
-});
+}); */
 
 module.exports = router;
