@@ -4,11 +4,13 @@ const path = require('path');
 
 const express = require('express');
 
+// tạo đường dẫn tới __dirname trỏ vào file path
+const rootDir = require('../util/path')
 const router = express.Router();
 
 // /admin/add-product => GET
 router.get('/them-sp', (req, res, next) => {
-  res.sendFile(path.join(__dirname, '../', 'views', 'them-sp.html'));
+  res.sendFile(path.join(rootDir, 'views', 'them-sp.html'));
 });
 
 // /admin/add-product => POST

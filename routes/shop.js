@@ -4,11 +4,14 @@ const path = require('path');
 
 const express = require('express');
 
+// tạo đường dẫn tới __dirname trỏ vào file path
+const rootDir = require('../util/path')
+
 const router = express.Router();
 
 // sử dụng require patch sendFile để dẫn đến link tang shop.html
 router.get('/', (req, res, next) => {
-  res.sendFile(path.join(__dirname,"../","views","shop.html"));
+  res.sendFile(path.join(rootDir, 'views', 'shop.html'));
 });
 
 module.exports = router;
