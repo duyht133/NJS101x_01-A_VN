@@ -7,6 +7,9 @@ const app = express();
 //import require patch
 const path = require("path");
 
+app.set('view engine','pug');
+app.set('views','views');
+
 app.use(bodyParser.urlencoded({ extended: false }));
 //thêm đường dẫn tĩnh static
 app.use(express.static(path.join(__dirname, 'public')));
