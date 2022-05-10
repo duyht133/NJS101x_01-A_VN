@@ -13,7 +13,7 @@ router.get('/', (req, res, next) => {
 
   // render using template engine PUG syntax.
   const products = adminData.products;
-  res.render("shop",{prods: products,pageTitle:"SHOP",path:'/'});
+  res.render("shop",{prods: products,pageTitle:"SHOP",path:'/',hasProduct:products.length > 0});
 });
 
 module.exports = router;

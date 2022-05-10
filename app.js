@@ -3,12 +3,14 @@ const shopRoutes = require("./routes/shop");
 const adminData = require("./routes/admin");
 const express = require("express");
 const app = express();
-
 //import require patch
 const path = require("path");
 
-// using templace engine
-app.set('view engine','pug'); // pug template engine
+// using templace engine handlebars
+const expressHbs = require('express-handlebars')
+app.engine('HBS',expressHbs());
+
+app.set('view engine','HBS'); // handlebars template engine
 app.set('views','views');
 
 app.use(bodyParser.urlencoded({ extended: false }));
