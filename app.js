@@ -22,6 +22,7 @@ app.use(shopRoutes);
 app.use((req, res, next) => {
   /* res.status(404).sendFile(path.join(__dirname, "views", "404.html")); */
   
+  // render using template engine PUG syntax.
   res.status(404).render("404");
 });
 
