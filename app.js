@@ -7,7 +7,8 @@ const app = express();
 //import require patch
 const path = require("path");
 
-app.set('view engine','pug');
+// using templace engine
+app.set('view engine','pug'); // pug template engine
 app.set('views','views');
 
 app.use(bodyParser.urlencoded({ extended: false }));
