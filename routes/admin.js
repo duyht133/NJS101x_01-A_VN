@@ -14,7 +14,7 @@ const products = [];
 router.get('/them-sp', (req, res, next) => {
   /* res.sendFile(path.join(rootDir, 'views', 'them-sp.html')); */
   // render using template engine PUG syntax.
-  res.render("them-sp",{pageTitle: 'Add Product',path:'/admin/them-sp'});
+  res.render("them-sp",{pageTitle: 'Add Product',path:'/admin/them-sp',formsCSS: true, productCSS: true, activeAddProduct: true});
 });
 
 // /admin/add-product => POST

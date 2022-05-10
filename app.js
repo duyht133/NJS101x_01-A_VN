@@ -8,10 +8,18 @@ const path = require("path");
 
 // using templace engine handlebars
 const expressHbs = require('express-handlebars')
-app.engine('HBS',expressHbs());
+app.engine(
+  'hbs',
+  expressHbs({
+    layoutsDir: 'views/layouts/',
+    defaultLayout: 'main-layout',
+    extname: 'hbs'
+  })
+);
 
-app.set('view engine','HBS'); // handlebars template engine
+app.set('view engine','hbs'); // handlebars template engine
 app.set('views','views');
+
 
 app.use(bodyParser.urlencoded({ extended: false }));
 //thêm đường dẫn tĩnh static
