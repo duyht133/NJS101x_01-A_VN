@@ -6,18 +6,8 @@ const app = express();
 //import require patch
 const path = require("path");
 
-// using templace engine handlebars
-const expressHbs = require('express-handlebars')
-app.engine(
-  'hbs',
-  expressHbs({
-    layoutsDir: 'views/layouts/',
-    defaultLayout: 'main-layout',
-    extname: 'hbs'
-  })
-);
-
-app.set('view engine','hbs'); // handlebars template engine
+// using templace engine ejs
+app.set('view engine','ejs'); // ejs template engine
 app.set('views','views');
 
 
