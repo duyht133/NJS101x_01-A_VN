@@ -1,25 +1,8 @@
 //import require patch
-const path = require("path");
 const express = require("express");
-// tạo đường dẫn tới __dirname trỏ vào file path
-const rootDir = require("../util/path");
-const adminData = require("./admin");
 const router = express.Router();
+// tạo đường dẫn tới __dirname trỏ vào file path
+const productsController = require("../controllers/products") 
 // sử dụng require patch sendFile để dẫn đến link tang shop.html
-router.get("/", (req, res, next) => {
-  /* res.sendFile(path.join(rootDir, 'views', 'shop.html')); */
-  console.log(adminData.products);
-
-  // render using template engine PUG syntax.
-  const products = adminData.products;
-  res.render("shop", {
-    prods: products,
-    pageTitle: "SHOP",
-    path: "/",
-    hasProduct: products.length > 0,
-    activeShop: true,
-    productCSS: true
-  });
-});
-
+router.get("/", productsController.getProducts);
 module.exports = router;
