@@ -1,6 +1,6 @@
 // Using connection data Mysql
 
-const mysql = require('mysql');
+const mysql = require('mysql2');
 
 // create pool (tạo pool để chứa các thông tin kết nối với Mysql)
 const pool = mysql.createPool({
