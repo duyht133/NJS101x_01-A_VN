@@ -19,7 +19,7 @@ exports.postAddProduct = (req, res, next) => {
     price: price,
     description: description,
   })
-    .then((res) => console.log(res))
+    .then(() => res.redirect('/admin/products'))
     .catch((err) => console.log(err));
 };
 
@@ -58,7 +58,7 @@ exports.postEditProduct = (req, res, next) => {
       product.imageUrl = updatedImageUrl;
       return product.save(); //save() là phương thức cung cấp bởi Sequelize
     })
-    .then((result) => {
+    .then(() => {
       console.log("UPDATED PRODUCT!");
       res.redirect("/admin/products");
     })
@@ -79,6 +79,12 @@ exports.getProducts = (req, res, next) => {
 
 exports.postDeleteProduct = (req, res, next) => {
   const prodId = req.body.productId;
-  Product.deleteById(prodId);
-  res.redirect("/admin/products");
+  Product.findByPk(prodId)
+    .then((products) => {
+      return products.destroy(); // detroy() là phương thức xóa dữ liệu cung cấp bởi Sequelize
+    })
+    .then(() => {
+      res.redirect("/admin/products");
+    })
+    .catch((err) => console.log(err));
 };
