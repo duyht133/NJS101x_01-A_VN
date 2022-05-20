@@ -1,7 +1,5 @@
-const Cart = require("./cart");
-
+/* const Cart = require("./cart");
 const db = require("../util/database");
-
 module.exports = class Product {
   constructor(id, title, imageUrl, description, price) {
     this.id = id;
@@ -19,7 +17,6 @@ module.exports = class Product {
   }
 
   static deleteById(id) {
-
   }
 
   static fetchAll() {
@@ -30,3 +27,37 @@ module.exports = class Product {
     return db.execute('SELECT * FROM products WHERE products.id = ?', [id])
   }
 };
+ */
+
+// Using 'Sequelize' ORM communicate database(Mysql,moongoDB)
+const Sequelize = require("sequelize");
+const sequelize = require("../util/database");
+
+//
+const Product = sequelize.define("product", {
+  id: {
+    type: Sequelize.INTEGER,
+    autoIncrement: true,
+    allowNull: false,
+    primaryKey: true,
+  },
+
+  title: Sequelize.STRING,
+
+  price: {
+    type: Sequelize.DOUBLE,
+    allowNull: false,
+  },
+
+  imageUrl: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+  
+  description: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+});
+
+module.exports = Product;
