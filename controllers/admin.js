@@ -1,4 +1,4 @@
-const Product = require('../models/product');
+/* const Product = require('../models/product');
 
 exports.getAddProduct = (req, res, next) => {
   res.render('admin/edit-product', {
@@ -100,3 +100,22 @@ exports.postDeleteProduct = (req, res, next) => {
     })
     .catch(err => console.log(err));
 };
+ */
+
+const ProductSchema = require('../models/product');
+
+const AdminController = {
+  getAddProduct: async(req, res, next) => {
+   try{
+    res.render('admin/edit-product', {
+      pageTitle: 'Add Product',
+      path: '/admin/add-product',
+      editing: false
+    });
+   }catch(err){
+     res.status(505).json("err")
+   }
+  },
+}
+
+module.exports = AdminController;

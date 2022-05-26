@@ -1,6 +1,8 @@
-const Product = require('../models/product');
 
-exports.getProducts = (req, res, next) => {
+// import model để thực thi logic controller để routes sử dụng
+/* const Product = require('../models/product'); */
+
+/* exports.getProducts = (req, res, next) => {
   Product.findAll()
     .then(products => {
       res.render('shop/product-list', {
@@ -161,3 +163,42 @@ exports.getOrders = (req, res, next) => {
     })
     .catch(err => console.log(err));
 };
+ */
+const Product = require('../models/product');
+
+const shopController = {
+  getIndex: async(req, res, next) => {
+   try{
+    const Index = await Product.find();
+    res.render('shop/index', {
+      prods: Index,
+      pageTitle: 'Shop',
+      path: '/'
+    });
+   }catch(err){
+     res.status(505).json("err")
+   }
+  },
+  getProducts: async(req, res, next) => {
+   
+  },
+  getProduct: async(req, res, next) => {
+   
+  },
+  getCart: async(req, res, next) => {
+   
+  },
+  postCart: async(req, res, next) => {
+   
+  },
+  postCartDeleteProduct: async(req, res, next) => {
+   
+  },
+  postOrder: async(req, res, next) => {
+   
+  },
+  getOrders: async(req, res, next) => {
+   
+  }
+}
+module.exports = shopController;

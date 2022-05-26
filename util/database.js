@@ -1,8 +1,14 @@
-const Sequelize = require('sequelize');
+const MongoClient = require("mongodb").MongoClient;
+const uri =
+  "mongodb+srv://cluster0.kxxq3.mongodb.net/?authSource=%24external&authMechanism=MONGODB-X509&retryWrites=true&w=majority";
 
-const sequelize = new Sequelize('node-complete', 'root', 'concat1233', {
-  dialect: 'mysql',
-  host: 'localhost'
-});
+const mongoConnect = (callback) => {
+  MongoClient.connect(uri)
+    .then((client) => {
+      console.log("connect");
+      callback(client);
+    })
+    .catch((err) => console.log(err));
+};
 
-module.exports = sequelize;
+module.exports = mongoConnect;
