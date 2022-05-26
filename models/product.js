@@ -29,7 +29,8 @@ const Product = sequelize.define('product', {
 module.exports = Product;
  */
 
-const mongoose = require('mongoose');
+//connect mongoose framework
+/* const mongoose = require('mongoose');
 
 const productSchema = new mongoose.Schema({
   id: {
@@ -51,4 +52,19 @@ const productSchema = new mongoose.Schema({
     require: true,
   }
 })
-module.exports = productSchema;
+module.exports = productSchema; */
+
+
+const mongoConnect = require('../util/database')
+
+class Product {
+  constructor(title, price, imageUrl, description) {
+    this.title = title;
+    this.price = price;
+    this.imageUrl = imageUrl;
+    this.description = description;
+  }
+  save() {
+
+  }
+}
