@@ -4,9 +4,9 @@ const getDb = require("../util/database").getDb;
 class Product {
   constructor(title, price, description, imageUrl, id) {
     this.title = title;
+    this.imageUrl = imageUrl;
     this.price = price;
     this.description = description;
-    this.imageUrl = imageUrl;
     this._id = id;
   }
 
