@@ -39,17 +39,14 @@ exports.getProducts = (req, res, next) => {
 };
 
 
-/* exports.getEditProduct = (req, res, next) => {
+exports.getEditProduct = (req, res, next) => {
   const editMode = req.query.edit;
   if (!editMode) {
     return res.redirect('/');
   }
   const prodId = req.params.productId;
-  req.user
-    .getProducts({ where: { id: prodId } })
-    // Product.findById(prodId)
-    .then(products => {
-      const product = products[0];
+    Product.findById(prodId)
+    .then(product => {
       if (!product) {
         return res.redirect('/');
       }
@@ -86,7 +83,7 @@ exports.postEditProduct = (req, res, next) => {
 
 
 
-exports.postDeleteProduct = (req, res, next) => {
+/* exports.postDeleteProduct = (req, res, next) => {
   const prodId = req.body.productId;
   Product.findById(prodId)
     .then(product => {
