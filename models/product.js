@@ -55,7 +55,7 @@ const productSchema = new mongoose.Schema({
 module.exports = productSchema; */
 
 
-const mongoConnect = require('../util/database')
+const getDb = require('../util/database').getDb;
 
 class Product {
   constructor(title, price, imageUrl, description) {
