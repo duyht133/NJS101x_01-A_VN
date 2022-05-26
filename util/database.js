@@ -1,6 +1,6 @@
 const MongoClient = require("mongodb").MongoClient;
 const uri =
-  "mongodb+srv://cluster0.kxxq3.mongodb.net/?authSource=%24external&authMechanism=MONGODB-X509&retryWrites=true&w=majority";
+  "mongodb+srv://admin:admin@cluster0.kxxq3.mongodb.net/?retryWrites=true&w=majority";
 
 let _db;
 const mongoConnect = (callback) => {
@@ -25,4 +25,3 @@ const getDb = (callback) => {
 
 exports.mongoConnect = mongoConnect;
 exports.getDb = getDb;
-
