@@ -14,7 +14,7 @@ class Product {
     const db = getDb();
     let dbOP;
     if (this._id) {
-      //update
+      //update product
       dbOP = db.collection("products").updateOne({ _id: this._id },{$set: this});
     } else {
       dbOP = db.collection("products").insertOne(this);

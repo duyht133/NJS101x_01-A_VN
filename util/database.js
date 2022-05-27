@@ -16,7 +16,7 @@ const mongoConnect = (callback) => {
     });
 };
 
-const getDb = (callback) => {
+const getDb = () => {
     if(_db){
         return _db;
     }
