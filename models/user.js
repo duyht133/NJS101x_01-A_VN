@@ -17,7 +17,7 @@ class User {
   }
 
   addToCart(product) {
-   /*  const cartProductIndex = this.cart.items.findIndex((cp) => {
+    const cartProductIndex = this.cart.items.findIndex((cp) => {
       return cp.productId.toString() === product._id.toString();
     });
     let newQuantity = 1;
@@ -31,9 +31,9 @@ class User {
         productId: new ObjectId(product._id),
         quantity: newQuantity,
       });
-    } */
+    }
     const updatedCart = {
-      items: [{productId: new ObjectId(product._id), quantity:1}],
+      items: updatedCartItems,
     };
     const db = getDb();
     return db
