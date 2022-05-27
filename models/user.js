@@ -15,7 +15,9 @@ class User {
     const db = getDb();
     return db
       .collection("users")
-      .findOne({ _id: new mongodb.ObjectId(userId) });
+      .findOne({ _id: new mongodb.ObjectId(userId) })
+      .then(user => user)
+      .catch((err) => console.log(err));
   }
 }
 
