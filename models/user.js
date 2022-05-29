@@ -17,9 +17,9 @@ class User {
   }
 
   addToCart(product) {
-    const cartProductIndex = this.cart.items.findIndex(cp => {
-      return cp.productId.toString() === product._id.toString();
-    });
+    const cartProductIndex = this.cart.items/* .findIndex(cp => {
+      return cp.productId.toString() == product._id.toString();
+    }); */
     let newQuantity = 1;
     const updatedCartItems = [...this.cart.items];
 
@@ -58,8 +58,8 @@ class User {
           return {
             ...p,
             quantity: this.cart.items.find(i => {
-              return i.productId.toString() === p._id.toString();
-            }).quantity
+              return i.productId === p._id;
+            })
           };
         });
       });
