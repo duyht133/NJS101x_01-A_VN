@@ -17,9 +17,9 @@ class User {
   }
 
   addToCart(product) {
-    const cartProductIndex = this.cart.items/* .findIndex(cp => {
-      return cp.productId.toString() == product._id.toString();
-    }); */
+    const cartProductIndex = this.cart.items.findIndex(cp => {
+      return cp.productId === product._id;
+    });
     let newQuantity = 1;
     const updatedCartItems = [...this.cart.items];
 
@@ -34,6 +34,7 @@ class User {
     }
     const updatedCart = {
       items: updatedCartItems
+     /*  items:[{...product,quantity:1}] */ // mở đoạn code này để nạp lại dữ liệu user
     };
     const db = getDb();
     return db
@@ -63,6 +64,19 @@ class User {
           };
         });
       });
+  }
+
+  deleteItemFromCart(productId) {
+    const updatedCartItems = this.cart.items.filter(data => {
+      return data.productId !== productId;
+    });
+    const db = getDb();
+    return db
+      .collection('users')
+      .updateOne(
+        { _id: new ObjectId(this._id) },
+        { $set: { cart: {items: updatedCartItems} } }
+      );
   }
 
   static findById(userId) {
