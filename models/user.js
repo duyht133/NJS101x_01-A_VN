@@ -75,17 +75,22 @@ class User {
 
   addOrder() {
     const db = getDb();
-    return db
-      .collection("order")
-      .insertOne(this.cart)
+    return this.getCart()
+      .then((products) => {
+        const order = {
+          items: products,
+          user: {
+            _id: new ObjectId(this._id),
+            name: this.name,
+          },
+        };
+        return db.collection("order").insertOne(order);
+      })
       .then(() => {
         this.cart = { items: [] };
         return db
           .collection("users")
-          .updateOne(
-            { _id: new ObjectId(this._id) },
-            { $set: { cart: { items: [] } } }
-          );
+          .updateOne({ _id: new ObjectId(this._id) }, { $set: { cart: { items: [] } } });
       });
   }
 
