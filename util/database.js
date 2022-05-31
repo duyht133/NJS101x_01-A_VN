@@ -1,6 +1,5 @@
-const MongoClient = require("mongodb").MongoClient;
-const uri =
-  "mongodb+srv://admin:admin@cluster0.kxxq3.mongodb.net/?retryWrites=true&w=majority";
+/* const MongoClient = require("mongodb").MongoClient;
+const uri = "mongodb+srv://admin:admin@cluster0.kxxq3.mongodb.net/?retryWrites=true&w=majority";
 
 let _db;
 const mongoConnect = (callback) => {
@@ -17,11 +16,12 @@ const mongoConnect = (callback) => {
 };
 
 const getDb = () => {
-    if(_db){
-        return _db;
-    }
-    throw 'no database found!'
-}
+  if (_db) {
+    return _db;
+  }
+  throw "no database found!";
+};
 
 exports.mongoConnect = mongoConnect;
 exports.getDb = getDb;
+ */

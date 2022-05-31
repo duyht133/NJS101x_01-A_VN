@@ -1,4 +1,4 @@
-const mongodb = require("mongodb");
+/* const mongodb = require("mongodb");
 const getDb = require("../util/database").getDb;
 
 const ObjectId = mongodb.ObjectId;
@@ -34,7 +34,6 @@ class User {
     }
     const updatedCart = {
       items: updatedCartItems,
-      /*  items:[{...product,quantity:1}] */ // mở đoạn code này để nạp lại dữ liệu user
     };
     const db = getDb();
     return db
@@ -118,3 +117,4 @@ class User {
 }
 
 module.exports = User;
+ */
