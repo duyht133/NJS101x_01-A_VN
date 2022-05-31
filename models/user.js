@@ -94,6 +94,14 @@ class User {
       });
   }
 
+  getOrders() {
+    const db = getDb();
+    return db
+      .collection("order")
+      .find({ 'user._id': new ObjectId(this._id) })
+      .toArray();
+  }
+
   static findById(userId) {
     const db = getDb();
     return db
