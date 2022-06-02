@@ -1,9 +1,11 @@
+// import Model handle database
 const Product = require("../models/product");
+const User = require("../models/user");
+const Order = require("../models/order");
 
 exports.getProducts = (req, res, next) => {
   Product.find()
     .then((products) => {
-      console.log(products)
       res.render("shop/product-list", {
         prods: products,
         pageTitle: "All Products",
@@ -43,17 +45,28 @@ exports.getIndex = (req, res, next) => {
 };
 
 exports.getCart = (req, res, next) => {
-  req.user
-    .populate('cart.items.productId')
+  User.find()
+    .then((products) => {
+      const product = products[0].cart.items;
+      res.render("shop/cart", {
+        path: "/cart",
+        pageTitle: "Your Cart",
+        products: product,
+      });
+    })
+    .catch((err) => console.log(err));
+  //////////////////////////////////////////////////////////////////////
+  /*  req.user //req.user chứa tấc cả các trạng thái của user.
+    .populate("cart.items.productId")
     .then((user) => {
-      const products = user.cart.items
+      const products = user.cart.items;
       res.render("shop/cart", {
         path: "/cart",
         pageTitle: "Your Cart",
         products: products,
       });
     })
-    .catch((err) => console.log(err));
+    .catch((err) => console.log(err)); */
 };
 
 exports.postCart = (req, res, next) => {
@@ -79,9 +92,21 @@ exports.postCartDeleteProduct = (req, res, next) => {
 };
 
 exports.postOrder = (req, res, next) => {
-  let fetchedCart;
-  req.user
-    .addOrder()
+  req.user //req.user chứa tấc cả các trạng thái của user.
+    .populate("cart.items.productId")
+    .then((user) => {
+      const products = user.cart.items.map((i) => {
+        return { quantity: i.quantity, product: i.productId };
+      });
+      const order = new Order({
+        user: {
+          name: req.user.name,
+          userId: req.user,
+        },
+        products: products,
+      });
+      return order.save();
+    })
     .then(() => {
       res.redirect("/orders");
     })

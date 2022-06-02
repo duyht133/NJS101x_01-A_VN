@@ -56,6 +56,7 @@ userSchema.methods.removeFromcart = function(productId){
   return this.save();
 }
 
+
 module.exports = mongoose.model('User', userSchema);
 
 /* const mongodb = require('mongodb');
