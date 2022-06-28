@@ -7,7 +7,7 @@
         <main>
             <% if (products.length > 0) { %>
                 <ul class="cart__item-list">
-                    <% products.map(p => { %>
+                    <% products.forEach(p => { %>
                         <li class="cart__item">
                             <h1><%= p.productId.title %></h1>
                             <h2>Quantity: <%= p.quantity %></h2>

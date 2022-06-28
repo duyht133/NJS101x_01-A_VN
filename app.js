@@ -3,7 +3,6 @@ const path = require("path");
 const express = require("express");
 const mongoose = require("mongoose");
 
-const errorController = require("./controllers/error");
 const User = require("./models/user");
 
 const app = express();
@@ -13,12 +12,14 @@ app.set("views", "views");
 
 const adminRoutes = require("./routes/admin");
 const shopRoutes = require("./routes/shop");
+const authRoutes = require('./routes/auth');
+const errorController = require("./controllers/error");
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use((req, res, next) => {
-  User.findById("6297a1c1834961027898b089")
+  User.findById("62bb0e9b7b4e52dcfc7df741")
     .then((user) => {
       req.user = user;
       next();
@@ -28,11 +29,11 @@ app.use((req, res, next) => {
 
 app.use("/admin", adminRoutes);
 app.use(shopRoutes);
-
+app.use(authRoutes);
 app.use(errorController.get404);
 
 mongoose
-  .connect("mongodb+srv://admin:admin@cluster0.kxxq3.mongodb.net/?retryWrites=true&w=majority")
+  .connect("mongodb+srv://admin:admin@cluster0.gphjhaw.mongodb.net/?retryWrites=true&w=majority")
   .then(() => {
     User.findOne().then((user) => { // lọc điều kiện để tránh tạo user mới mỗi lần reset server
       if (!user) {
