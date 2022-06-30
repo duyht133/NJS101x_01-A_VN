@@ -2,6 +2,7 @@ const path = require("path");
 
 const express = require("express");
 const mongoose = require("mongoose");
+// dùng session(phiên làm việc) để connect và kiểm soát login và logout với mongodb
 const session = require("express-session");
 const MongoDBstore = require("connect-mongodb-session")(session);
 
@@ -10,12 +11,14 @@ const User = require("./models/user");
 const MONGODB_URI =
   "mongodb+srv://admin:admin@cluster0.gphjhaw.mongodb.net/?retryWrites=true&w=majority";
 
+// sử dụng session để connect mongodb
 const app = express();
 const store = new MongoDBstore({
   uri: MONGODB_URI,
   collection: "sessions",
 });
 
+// sử dụng ejs để có thể views trong thư mục views
 app.set("view engine", "ejs");
 app.set("views", "views");
 
@@ -26,6 +29,8 @@ const errorController = require("./controllers/error");
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
+
+// dùng session
 app.use(
   session({
     secret: "my secret",
@@ -64,19 +69,6 @@ app.use(errorController.get404);
 mongoose
   .connect(MONGODB_URI)
   .then(() => {
-    User.findOne().then((user) => {
-      // lọc điều kiện để tránh tạo user mới mỗi lần reset server
-      if (!user) {
-        const user = new User({
-          name: "Duyht",
-          email: "text@mail.com",
-          cart: {
-            items: [],
-          },
-        });
-        user.save();
-      }
-    });
     app.listen(3000);
   })
   .catch((err) => console.log(err));
