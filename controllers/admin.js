@@ -1,6 +1,10 @@
 const Product = require('../models/product');
 
 exports.getAddProduct = (req, res, next) => {
+  console.log(req.session.isLoggedIn);
+  if(!req.session.isLoggedIn){ // kiểm tra điều kiện nếu không có phiên login thì không cho hiển thị trang product.
+    return res.redirect('/login');
+  }
   res.render('admin/edit-product', {
     pageTitle: 'Add Product',
     path: '/admin/add-product',
@@ -79,8 +83,6 @@ exports.postEditProduct = (req, res, next) => {
 
 exports.getProducts = (req, res, next) => {
   Product.find()
-    // .select('title price -_id')
-    // .populate('userId', 'name')
     .then(products => {
       console.log(products);
       res.render('admin/products', {

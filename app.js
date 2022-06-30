@@ -11,8 +11,8 @@ const User = require("./models/user");
 const MONGODB_URI =
   "mongodb+srv://admin:admin@cluster0.gphjhaw.mongodb.net/?retryWrites=true&w=majority";
 
-// sử dụng session để connect mongodb
 const app = express();
+// sử dụng session tạo store để connect mongodb
 const store = new MongoDBstore({
   uri: MONGODB_URI,
   collection: "sessions",
@@ -45,15 +45,6 @@ app.use((req, res, next) => {
     return next();
   }
   User.findById(req.session.user._id)
-    .then((user) => {
-      req.user = user;
-      next();
-    })
-    .catch((err) => console.log(err));
-});
-
-app.use((req, res, next) => {
-  User.findById("62bb0e9b7b4e52dcfc7df741")
     .then((user) => {
       req.user = user;
       next();

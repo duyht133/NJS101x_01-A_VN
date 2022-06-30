@@ -26,11 +26,11 @@ exports.postLogin = (req, res, next) => {
       if (!user) {
         return res.redirect("/login");
       }
-      bcrypt
+      bcrypt // giải mật khẩu để so sánh database để đăng nhập
         .compare(password, user.password)
         .then((doMatch) => {
           if (doMatch) {
-            req.session.isLoggedIn = true;
+            req.session.isLoggedIn = true; // tạo isLoggedIn=true dùng để so sánh và hiển thị navigation
             req.session.user = user;
             return req.session.save((err) => {
               console.log(err);
@@ -56,7 +56,7 @@ exports.postSignup = (req, res, next) => {
       if (userDoc) {
         return res.redirect("/signup");
       }
-      return bcrypt
+      return bcrypt // mã hóa mật khẩu
         .hash(password, 12)
         .then((passwordHasher) => {
           const user = new User({
