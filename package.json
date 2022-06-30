@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/duyht133/NJS101x_01-A_VN#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.0",
     "connect-mongodb-session": "^3.1.1",
     "ejs": "^3.1.7",
