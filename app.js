@@ -1,17 +1,21 @@
 const path = require("path");
+const User = require("./models/user");
 
 const express = require("express");
 const mongoose = require("mongoose");
 // dùng session(phiên làm việc) để connect và kiểm soát login và logout với mongodb
 const session = require("express-session");
 const MongoDBstore = require("connect-mongodb-session")(session);
+// sử dụng csurf để bảo vệ các cuộc tấn công điều hướng req
+const csrf = require("csurf")
+const  csrfProtection = csrf();
 
-const User = require("./models/user");
 
 const MONGODB_URI =
   "mongodb+srv://admin:admin@cluster0.gphjhaw.mongodb.net/?retryWrites=true&w=majority";
 
 const app = express();
+
 // sử dụng session tạo store để connect mongodb
 const store = new MongoDBstore({
   uri: MONGODB_URI,
@@ -27,6 +31,7 @@ const shopRoutes = require("./routes/shop");
 const authRoutes = require("./routes/auth");
 const errorController = require("./controllers/error");
 
+// dùng path để link với Css
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 
@@ -39,6 +44,9 @@ app.use(
     store: store,
   })
 );
+
+// dùng csrf
+app.use(csrfProtection)
 
 app.use((req, res, next) => {
   if (!req.session.user) {

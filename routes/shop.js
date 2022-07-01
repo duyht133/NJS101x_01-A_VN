@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const shopController = require('../controllers/shop');
-const isAuth = require('../middleware/is-auth');
+const isAuth = require('../middleware/is-auth');// nạp middleware để bảo vệ router
 
 
 router.get('/', shopController.getIndex);

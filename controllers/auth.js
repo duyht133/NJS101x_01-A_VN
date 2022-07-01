@@ -26,7 +26,7 @@ exports.postLogin = (req, res, next) => {
       if (!user) {
         return res.redirect("/login");
       }
-      bcrypt // giải mật khẩu để so sánh database để đăng nhập
+      bcrypt // giải mật khẩu so sánh database để đăng nhập
         .compare(password, user.password)
         .then((doMatch) => {
           if (doMatch) {
