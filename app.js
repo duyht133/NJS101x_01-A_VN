@@ -9,7 +9,8 @@ const MongoDBstore = require("connect-mongodb-session")(session);
 // sử dụng csurf để bảo vệ các cuộc tấn công điều hướng req
 const csrf = require("csurf")
 const  csrfProtection = csrf();
-
+// sử dụng flash để thay thế giao tiếp thủ công
+const flash = require('connect-flash');
 
 const MONGODB_URI =
   "mongodb+srv://admin:admin@cluster0.gphjhaw.mongodb.net/?retryWrites=true&w=majority";
@@ -47,6 +48,9 @@ app.use(
 
 // dùng csrf
 app.use(csrfProtection)
+
+// dùng flash
+app.use(flash());
 
 app.use((req, res, next) => {
   if (!req.session.user) {
