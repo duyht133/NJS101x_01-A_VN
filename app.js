@@ -9,7 +9,7 @@ const MongoDBstore = require("connect-mongodb-session")(session);
 // sử dụng csurf để bảo vệ các cuộc tấn công điều hướng req
 const csrf = require("csurf")
 const  csrfProtection = csrf();
-// sử dụng flash để thay thế giao tiếp thủ công
+// sử dụng flash để thay thế hiển thị thông báo tới User thay cách thủ công
 const flash = require('connect-flash');
 
 const MONGODB_URI =
