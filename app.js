@@ -8,7 +8,6 @@ const session = require("express-session");
 const MongoDBstore = require("connect-mongodb-session")(session);
 // sử dụng csurf để bảo vệ các cuộc tấn công điều hướng req
 const csrf = require("csurf")
-const  csrfProtection = csrf();
 // sử dụng flash để thay thế hiển thị thông báo tới User thay cách thủ công
 const flash = require('connect-flash');
 
@@ -26,7 +25,7 @@ const store = new MongoDBstore({
 // sử dụng ejs để có thể views trong thư mục views
 app.set("view engine", "ejs");
 app.set("views", "views");
-
+// sử dụng router để điều hướng trang
 const adminRoutes = require("./routes/admin");
 const shopRoutes = require("./routes/shop");
 const authRoutes = require("./routes/auth");
@@ -36,6 +35,7 @@ const errorController = require("./controllers/error");
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 
+////////////////////////////////////////
 // dùng session
 app.use(
   session({
@@ -47,7 +47,7 @@ app.use(
 );
 
 // dùng csrf
-app.use(csrfProtection)
+app.use(csrf())
 
 // dùng flash
 app.use(flash());
@@ -78,6 +78,8 @@ app.use(errorController.get404);
 mongoose
   .connect(MONGODB_URI)
   .then(() => {
-    app.listen(3000);
+    app.listen(3000,() => {
+      console.log("server running 3000");
+    });
   })
   .catch((err) => console.log(err));
