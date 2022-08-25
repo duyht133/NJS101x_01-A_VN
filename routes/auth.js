@@ -3,6 +3,7 @@ const express = require("express");
 // import function check from express-validator/check/
 // controll form validation user import,check is function used to check data use import
 const { check, body } = require("express-validator");
+const User = require("../models/user")
 
 const authController = require("../controllers/auth");
 
@@ -21,14 +22,25 @@ router.post(
       .isEmail()
       .withMessage("Please enter a valid email.")
       .custom((value, { req }) => {
-        if (value === "test@test.com") {
+        /* if (value === "test@test.com") {
           throw new Error("This email address if forbidden.");
         }
-        return true;
+        return true; */
+        return User.findOne({ email: value }).then((userDoc) => {
+          if (userDoc) {
+            return Promise.reject("E-Mail exists already, please pick a different one.");
+          }
+        });
       }),
-    body("password","Please enter a valid with only numbers password.")
+    body("password", "Please enter a valid with only numbers + syntax and at least 5 password.")
       .isLength({ min: 5 })
       .isAlphanumeric(),
+    body("confirmPassword").custom((value, { req }) => {
+      if (value !== req.body.password) {
+        throw new Error("Passwords have to match!");
+      }
+      return true;
+    }),
   ],
   authController.postSignup
 );
