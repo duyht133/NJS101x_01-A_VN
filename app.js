@@ -7,9 +7,11 @@ const mongoose = require("mongoose");
 const session = require("express-session");
 const MongoDBstore = require("connect-mongodb-session")(session);
 // sử dụng csurf để bảo vệ các cuộc tấn công điều hướng req
-const csrf = require("csurf")
-// sử dụng flash để thay thế hiển thị thông báo tới User thay cách thủ công
-const flash = require('connect-flash');
+const csrf = require("csurf");
+// sử dụng flash để thay thế hiển thị thông báo tới User
+const flash = require("connect-flash");
+//sử dụng multer để thêm file
+const multer = require("multer");
 
 const MONGODB_URI =
   "mongodb+srv://admin:admin@cluster0.gphjhaw.mongodb.net/?retryWrites=true&w=majority";
@@ -31,8 +33,20 @@ const shopRoutes = require("./routes/shop");
 const authRoutes = require("./routes/auth");
 const errorController = require("./controllers/error");
 
-// dùng path để link với Css
+// phương thức lấy dữ liệu từ body param
 app.use(express.urlencoded({ extended: false }));
+// cài đặt Multer upload file 
+// khai báo nơi lưu trữ file
+const fileStorage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "images");
+  },
+  filename: (req, file, cb) => {
+    cb(null, new Date().toISOString() + "-" + file.originalname);
+  },
+});
+app.use(multer({ storage: fileStorage }).single("image")); // image là biến name khai báo trong form input
+// dùng path để link với Css
 app.use(express.static(path.join(__dirname, "public")));
 
 ////////////////////////////////////////
@@ -47,7 +61,7 @@ app.use(
 );
 
 // dùng csrf
-app.use(csrf())
+app.use(csrf());
 
 // dùng flash
 app.use(flash());
@@ -78,7 +92,7 @@ app.use(errorController.get404);
 mongoose
   .connect(MONGODB_URI)
   .then(() => {
-    app.listen(3000,() => {
+    app.listen(3000, () => {
       console.log("server running 3000");
     });
   })

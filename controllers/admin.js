@@ -15,10 +15,11 @@ exports.getAddProduct = (req, res, next) => {
 
 exports.postAddProduct = (req, res, next) => {
   const title = req.body.title;
-  const imageUrl = req.body.imageUrl;
+  const imageUrl = req.file;
   const price = req.body.price;
   const description = req.body.description;
   const errors = validationResult(req);
+  console.log(imageUrl)
 
   if (!errors.isEmpty()) {
     console.log(errors.array());
@@ -48,7 +49,7 @@ exports.postAddProduct = (req, res, next) => {
   product
     .save()
     .then(result => {
-      // console.log(result);
+      
       console.log('Created Product');
       res.redirect('/admin/products');
     })

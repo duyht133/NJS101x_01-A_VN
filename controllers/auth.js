@@ -43,9 +43,10 @@ exports.getSignup = (req, res, next) => {
     },
     validationError: [],
   });
-};
+}; 
 
 exports.postLogin = (req, res, next) => {
+  console.log(req)
   const email = req.body.email;
   const password = req.body.password;
 
